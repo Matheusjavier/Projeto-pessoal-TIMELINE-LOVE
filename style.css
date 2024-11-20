@@ -1,0 +1,111 @@
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+}
+
+header {
+    background-color: #ff1803; /* Fundo vermelho */
+    color: white; /* Cor do texto em branco */
+    padding: 20px;
+    animation: glow 1.5s ease-in-out infinite alternate; /* Animação de brilho */
+    position: relative;
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os limites da header */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3rem;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000; /* Brilho */
+}
+
+header p {
+    margin: 10px 0 0;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 10px #fff, 0 0 20px #ff0000, 0 0 30px #ff0000, 0 0 40px #ff0000;
+    }
+    100% {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff0000, 0 0 40px #ff0000, 0 0 50px #ff0000;
+    }
+}
+
+.timeline {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px auto;
+    max-width: 800px;
+    gap: 20px;
+}
+
+.event {
+    width: 150px;
+    height: 150px; /* Defina uma altura fixa para manter o layout */
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden; /* Garante que o fundo não ultrapasse os limites da imagem */
+    transition: transform 0.3s;
+    background-image: url('background.jpg'); /* Coloca o GIF como fundo */
+    background-size: cover; /* Faz o GIF cobrir toda a área do evento */
+    background-position: center; /* Centraliza o GIF */
+    background-repeat: no-repeat; /* Impede a repetição do GIF */
+}
+
+.event:hover {
+    transform: scale(1.1);
+}
+
+.event img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta a imagem para cobrir a área da div */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute; /* Faz com que a imagem fique sobre o fundo */
+    top: 0;
+    left: 0;
+}
+
+.event span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: white; /* Garante que o texto tenha boa visibilidade */
+}
+
+#message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #ff6f61;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
+
+#message-box button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#message-box button:hover {
+    background-color: #e55d54;
+}

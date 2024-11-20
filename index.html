@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linha do Tempo - Caça ao Tesouro</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* CSS para esconder e mostrar a caixa de mensagens */
+        .hidden {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Define a altura para 100% da tela */
+            background-image: url('Imagens/background.jpg'); /* Imagem de fundo */
+            background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+            background-position: center; /* Posiciona a imagem no centro */
+            background-repeat: no-repeat; /* Impede que a imagem se repita */
+            color: #333;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            background-color: #ff1803;
+            color: white;
+            padding: 20px;
+            transition: all 0.3s ease; /* Transição suave */
+        }
+
+        /* Efeito neon nas letras do título */
+        header h1 {
+            font-size: 2.3em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px #ff1803; /* Glow de neon */
+        }
+
+        header p {
+            margin: 10px 0 0;
+        }
+
+        .timeline {
+            display: grid; /* Usa grid para organizar as imagens */
+            grid-template-columns: repeat(3, 1fr); /* Define 3 colunas por página */
+            gap: 120px; /* Aumenta o espaçamento entre as imagens */
+            justify-items: center; /* Alinha as imagens no centro */
+            margin: 20px auto;
+            max-width: 100%; /* Garantir que a largura seja 100% da tela ou até o limite desejado */
+            flex-grow: 1; /* Faz a timeline crescer dentro do layout */
+        }
+
+        /* Estilo dos quadrados das fotos */
+        .event {
+            width: 180px; /* Tamanho maior das imagens */
+            height: 180px; /* Mantém altura e largura iguais para formar quadrados */
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .event:hover {
+            transform: scale(1.1); /* Aumenta a foto no hover */
+        }
+
+        .event img {
+            width: 100%;
+            height: 100%; /* Faz com que a imagem ocupe todo o quadrado */
+            object-fit: cover; /* Faz a imagem cobrir o quadrado sem distorcer */
+            border-radius: 10px; /* Borda arredondada */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .event span {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #ff6f61;
+        }
+
+        #message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border: 2px solid #ff6f61;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        #message-box.hidden {
+            display: none;
+        }
+
+        #message-box button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #message-box button:hover {
+            background-color: #e55d54;
+        }
+
+        /* Paginacao */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px; /* Fixar a paginação na parte inferior */
+            width: 100%;
+            margin: 0;
+        }
+
+        .pagination button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #e55d54;
+        }
+
+        .pagination .active {
+            background-color: #e55d54;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Caça ao Tesouro do Amor 💖</h1>
+        <p>Clique nas fotos para descobrir mensagens e pistas especiais!</p>
+    </header>
+    <main>
+        <!-- Adicionamos a área da linha do tempo -->
+        <div class="timeline" id="timeline"></div>
+
+        <!-- Caixa de mensagem -->
+        <div id="message-box" class="hidden">
+            <p id="message"></p>
+            <button onclick="hideMessage()">Fechar</button>
+        </div>
+    </main>
+
+    <!-- Paginação -->
+    <div class="pagination" id="pagination"></div>
+
+    <script>
+        // Array com as mensagens de amor
+        const messages = [
+            'Minha primeira mensagem especial para você!',
+            'Você é incrível, nunca se esqueça disso!',
+            'Te amo mais do que palavras podem expressar.',
+            'Pista final: Procure no lugar onde compartilhamos nosso maior segredo.',
+            'A felicidade está ao seu lado!',
+            'Eu adoro nosso tempo juntos!',
+            'A vida é mais bonita com você!',
+            'Eu sou grato(a) por ter você.',
+            'Você é a razão do meu sorriso.',
+            'Juntos, somos mais fortes.',
+            'Nunca imaginei que o amor fosse assim.',
+            'Você é o melhor de mim.',
+            'Sempre ao seu lado, hoje e sempre.',
+            'Com você, tudo é mais bonito.',
+            'Eu me apaixono mais por você a cada dia.',
+            'Eu sempre estarei ao seu lado.',
+            'Cada momento ao seu lado é especial.',
+            'A felicidade é estar com você.',
+            'Eu sou a pessoa mais sortuda por ter você.',
+            'O amor que sinto por você é infinito.',
+            'Cada dia ao seu lado é um presente.',
+            'Você ilumina minha vida.',
+            'Você é o meu maior tesouro.',
+            'Você é meu sol em dias nublados.',
+            'Eu te amo mais a cada amanhecer.',
+            'Você faz meu mundo mais colorido.',
+            'Com você, todo dia é especial.',
+            'Te amo com todo o meu coração.',
+            'Você é minha razão de ser.',
+            'Nunca pensei que poderia amar tanto.'
+        ];
+
+        const images = [
+            'Imagens/segundo date.jpg', 'Imagens/Foto2.jpg', 'Imagens/farol.jpg',
+            'Imagens/primeirobeijo.jpg', 'Imagens/primeiromes.jpg', 'Imagens/primeironatal.jpg',
+            'Imagens/primeiraviagem.jpg', 'Imagens/primeirofestival.jpg', 'Imagens/bingo.jpg',
+            'Imagens/foto8.jpg', 'Imagens/foto9.jpg', 'Imagens/ubatuba 1.jpg',
+            'Imagens/ubatuba 2.jpg', 'Imagens/trindade.jpg', 'Imagens/anonovo.jpg',
+            'Imagens/parque.jpg', 'Imagens/formatura.jpg', 'Imagens/corinthians.jpg',
+            'Imagens/showluan.jpg', 'Imagens/apresentaçãobe.jpg', 'Imagens/van.jpg',
+            'Imagens/tardezinha.jpg', 'Imagens/anonovo2.jpg', 'Imagens/anivercarol.jpg',
+            'Imagens/carnaval.jpg', 'Imagens/carnaval2.jpg', 'Imagens/pagode.jpg',
+            'Imagens/RJ 2.jpg', 'Imagens/RJ3.jpg', 'Imagens/meuaniver24.jpg'
+        ];
+
+        // Array de títulos personalizados
+        const titles = [
+            'Primeiro Encontro', 'Nosso Passeio', 'O Grande Dia', 'Lembrança Especial', 
+            'Nossa Primeira Foto', 'Momento Inesquecível', 'Nosso Segredo', 'Sempre Juntos',
+            'Noite Mágica', 'Rindo Juntos', 'No Meu Coração', 'Te Amo Mais a Cada Dia',
+            'A Melhor Companhia', 'Sempre ao Seu Lado', 'Futuro Brilhante', 'Amor Verdadeiro', 
+            'Nosso Amor', 'Te Amo Muito', 'Momentos Perfeitos', 'Dia de Sol', 'Nosso Abraço', 
+            'Feliz Juntos', 'Sorrindo Sempre', 'Amor à Primeira Vista', 'Você e Eu', 
+            'Pequenos Momentos', 'Mãos Dadas', 'Cada Passo Juntos', 'Amor Eterno', 
+            'Nosso Caminho', 'Amigos e Amor'
+        ];
+
+        const itemsPerPage = 6; // Quantidade de itens por página
+        let currentPage = 1;
+
+        function displayPage(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageMessages = messages.slice(start, end);
+            const pageImages = images.slice(start, end);
+            const pageTitles = titles.slice(start, end);  // Extraímos os títulos para esta página
+
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '';
+
+            pageMessages.forEach((message, index) => {
+                const eventDiv = document.createElement('div');
+                eventDiv.classList.add('event');
+                eventDiv.onclick = function() {
+                    showMessage(message);
+                };
+
+                const img = document.createElement('img');
+                img.src = pageImages[index];
+                img.alt = `Foto ${start + index + 1}`;
+
+                const span = document.createElement('span');
+                span.textContent = pageTitles[index];  // Usamos o título correto da página
+
+                eventDiv.appendChild(img);
+                eventDiv.appendChild(span);
+                timeline.appendChild(eventDiv);
+            });
+
+            updatePagination(page);
+        }
+
+        function showMessage(msg) {
+            document.getElementById('message').textContent = msg;
+            document.getElementById('message-box').classList.remove('hidden');
+        }
+
+        function hideMessage() {
+            document.getElementById('message-box').classList.add('hidden');
+        }
+
+        function updatePagination(page) {
+            const pagination = document.getElementById('pagination');
+            const totalPages = Math.ceil(messages.length / itemsPerPage);
+
+            pagination.innerHTML = ''; 
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement('button');
+                button.textContent = i;
+                button.classList.toggle('active', i === page);
+                button.onclick = function() {
+                    displayPage(i);
+                };
+                pagination.appendChild(button);
+            }
+        }
+
+        displayPage(currentPage);
+    </script>
+</body>
+</html>
