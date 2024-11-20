@@ -48,7 +48,7 @@
         .timeline {
             display: grid; /* Usa grid para organizar as imagens */
             grid-template-columns: repeat(3, 1fr); /* Define 3 colunas por página */
-            gap: 20px; /* Aumenta o espaçamento entre as imagens */
+            gap: 120px; /* Aumenta o espaçamento entre as imagens */
             justify-items: center; /* Alinha as imagens no centro */
             margin: 20px auto;
             max-width: 100%; /* Garantir que a largura seja 100% da tela ou até o limite desejado */
@@ -141,45 +141,6 @@
 
         .pagination .active {
             background-color: #e55d54;
-        }
-
-        /* Media Queries para Responsividade */
-        @media (max-width: 768px) {
-            .timeline {
-                grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas médias */
-            }
-
-            .event {
-                width: 150px; /* Menor tamanho para telas menores */
-                height: 150px;
-            }
-
-            header h1 {
-                font-size: 1.8em; /* Ajusta o tamanho da fonte do título */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .timeline {
-                grid-template-columns: 1fr; /* 1 coluna em telas pequenas */
-            }
-
-            .event {
-                width: 100px; /* Tamanho menor para telas pequenas */
-                height: 100px;
-            }
-
-            header h1 {
-                font-size: 1.5em; /* Ajusta ainda mais o tamanho do título */
-            }
-
-            #message-box {
-                width: 250px; /* Reduz a largura da caixa de mensagem */
-            }
-
-            .pagination button {
-                padding: 8px 15px; /* Ajusta o tamanho dos botões de paginação */
-            }
         }
     </style>
 </head>
