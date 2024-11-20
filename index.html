@@ -45,42 +45,75 @@
             margin: 10px 0 0;
         }
 
+        /* Linha do tempo responsiva */
         .timeline {
-            display: grid; /* Usa grid para organizar as imagens */
-            grid-template-columns: repeat(3, 1fr); /* Define 3 colunas por página */
-            gap: 120px; /* Aumenta o espaçamento entre as imagens */
-            justify-items: center; /* Alinha as imagens no centro */
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Definindo 4 colunas no desktop */
+            gap: 20px; /* Espaçamento entre as imagens */
+            justify-items: center;
             margin: 20px auto;
-            max-width: 100%; /* Garantir que a largura seja 100% da tela ou até o limite desejado */
+            max-width: 100%; /* Garantir que a largura seja 100% da tela */
             flex-grow: 1; /* Faz a timeline crescer dentro do layout */
+        }
+
+        @media (max-width: 1024px) {
+            .timeline {
+                grid-template-columns: repeat(3, 1fr); /* Ajuste para 3 colunas em telas menores */
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                grid-template-columns: repeat(2, 1fr); /* Ajuste para 2 colunas em telas ainda menores */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline {
+                grid-template-columns: 1fr; /* Apenas 1 coluna em dispositivos móveis */
+            }
+
+            header h1 {
+                font-size: 1.8em; /* Reduz o tamanho da fonte do título */
+            }
         }
 
         /* Estilo dos quadrados das fotos */
         .event {
-            width: 180px; /* Tamanho maior das imagens */
-            height: 180px; /* Mantém altura e largura iguais para formar quadrados */
+            width: 100%; /* Ocupa toda a largura disponível da célula */
+            height: 0;
+            padding-bottom: 100%; /* Mantém a proporção 1:1 (quadrado) */
             text-align: center;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
             transition: transform 0.3s ease;
-        }
-
-        .event:hover {
-            transform: scale(1.1); /* Aumenta a foto no hover */
-        }
-
-        .event img {
-            width: 100%;
-            height: 100%; /* Faz com que a imagem ocupe todo o quadrado */
-            object-fit: cover; /* Faz a imagem cobrir o quadrado sem distorcer */
             border-radius: 10px; /* Borda arredondada */
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
+        .event:hover {
+            transform: scale(1.1); /* Aumenta a foto ao passar o mouse */
+        }
+
+        .event img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Faz a imagem preencher a área sem distorcer */
+        }
+
         .event span {
-            display: block;
-            margin-top: 10px;
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
             font-weight: bold;
-            color: #ff6f61;
         }
 
         #message-box {
@@ -202,13 +235,7 @@
             'Imagens/segundo date.jpg', 'Imagens/Foto2.jpg', 'Imagens/farol.jpg',
             'Imagens/primeirobeijo.jpg', 'Imagens/primeiromes.jpg', 'Imagens/primeironatal.jpg',
             'Imagens/primeiraviagem.jpg', 'Imagens/primeirofestival.jpg', 'Imagens/bingo.jpg',
-            'Imagens/foto8.jpg', 'Imagens/foto9.jpg', 'Imagens/Ubatuba 1.jpg',
-            'Imagens/ubatuba 2.jpg', 'Imagens/trindade.jpg', 'Imagens/anonovo.jpg',
-            'Imagens/parque.jpg', 'Imagens/formatura.jpg', 'Imagens/corinthians.jpg',
-            'Imagens/showluan.jpg', 'Imagens/apresentaçãobe.jpg', 'Imagens/van.jpg',
-            'Imagens/tardezinha.jpg', 'Imagens/anonovo2.jpg', 'Imagens/anivercarol.jpg',
-            'Imagens/carnaval.jpg', 'Imagens/carnaval2.jpg', 'Imagens/pagode.jpg',
-            'Imagens/RJ 2.jpg', 'Imagens/RJ3.jpg', 'Imagens/meuaniver24.jpg'
+            'Imagens/festa.jpg', 'Imagens/RJ.jpg', 'Imagens/RJ 2.jpg', 'Imagens/RJ3.jpg', 'Imagens/meuaniver24.jpg'
         ];
 
         // Array de títulos personalizados
