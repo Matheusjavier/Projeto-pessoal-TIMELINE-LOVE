@@ -6,148 +6,216 @@
     <title>Linha do Tempo - Caça ao Tesouro</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* CSS para esconder e mostrar a caixa de mensagens */
-        .hidden {
-            display: none;
-        }
+   /* CSS para esconder e mostrar a caixa de mensagens */
+.hidden {
+    display: none;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh; /* Define a altura para 100% da tela */
-            background-image: url('Imagens/background.jpg'); /* Imagem de fundo */
-            background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
-            background-position: center; /* Posiciona a imagem no centro */
-            background-repeat: no-repeat; /* Impede que a imagem se repita */
-            color: #333;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Define a altura para 100% da tela */
+    background-image: url('Imagens/background.jpg'); /* Imagem de fundo */
+    background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+    background-position: center; /* Posiciona a imagem no centro */
+    background-repeat: no-repeat; /* Impede que a imagem se repita */
+    color: #333;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
 
-        header {
-            background-color: #ff1803;
-            color: white;
-            padding: 20px;
-            transition: all 0.3s ease; /* Transição suave */
-        }
+header {
+    background-color: #ff1803;
+    color: white;
+    padding: 20px;
+    transition: all 0.3s ease; /* Transição suave */
+}
 
-        /* Efeito neon nas letras do título */
-        header h1 {
-            font-size: 2.3em;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px #ff1803; /* Glow de neon */
-        }
+/* Efeito neon nas letras do título */
+header h1 {
+    font-size: 2.3em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7), 0 0 20px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px #ff1803; /* Glow de neon */
+}
 
-        header p {
-            margin: 10px 0 0;
-        }
+header p {
+    margin: 10px 0 0;
+}
 
-        .timeline {
-            display: grid; /* Usa grid para organizar as imagens */
-            grid-template-columns: repeat(3, 1fr); /* Define 3 colunas por página */
-            gap: 120px; /* Aumenta o espaçamento entre as imagens */
-            justify-items: center; /* Alinha as imagens no centro */
-            margin: 20px auto;
-            max-width: 100%; /* Garantir que a largura seja 100% da tela ou até o limite desejado */
-            flex-grow: 1; /* Faz a timeline crescer dentro do layout */
-        }
+.timeline {
+    display: grid; /* Usa grid para organizar as imagens */
+    grid-template-columns: repeat(3, 1fr); /* Define 3 colunas por página */
+    gap: 120px; /* Aumenta o espaçamento entre as imagens */
+    justify-items: center; /* Alinha as imagens no centro */
+    margin: 20px auto;
+    max-width: 100%; /* Garantir que a largura seja 100% da tela ou até o limite desejado */
+    flex-grow: 1; /* Faz a timeline crescer dentro do layout */
+}
 
-        /* Estilo dos quadrados das fotos */
-        .event {
-            width: 180px; /* Tamanho maior das imagens */
-            height: 180px; /* Mantém altura e largura iguais para formar quadrados */
-            text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
+/* Estilo dos quadrados das fotos */
+.event {
+    width: 180px; /* Tamanho maior das imagens */
+    height: 180px; /* Mantém altura e largura iguais para formar quadrados */
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
 
-        .event:hover {
-            transform: scale(1.1); /* Aumenta a foto no hover */
-        }
+.event:hover {
+    transform: scale(1.1); /* Aumenta a foto no hover */
+}
 
-        .event img {
-            width: 100%;
-            height: 100%; /* Faz com que a imagem ocupe todo o quadrado */
-            object-fit: cover; /* Faz a imagem cobrir o quadrado sem distorcer */
-            border-radius: 10px; /* Borda arredondada */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+.event img {
+    width: 100%;
+    height: 100%; /* Faz com que a imagem ocupe todo o quadrado */
+    object-fit: cover; /* Faz a imagem cobrir o quadrado sem distorcer */
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-        .event span {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-            color: #ff6f61;
-        }
+.event span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #ff6f61;
+}
 
-        #message-box {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border: 2px solid #ff6f61;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            width: 300px;
-            text-align: center;
-        }
+#message-box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #ff6f61;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: center;
+}
 
-        #message-box.hidden {
-            display: none;
-        }
+#message-box.hidden {
+    display: none;
+}
 
-        #message-box button {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
+#message-box button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
 
-        #message-box button:hover {
-            background-color: #e55d54;
-        }
+#message-box button:hover {
+    background-color: #e55d54;
+}
 
-        /* Paginacao */
-        .pagination {
-            display: flex;
-            justify-content: center;
-            position: absolute;
-            bottom: 20px; /* Fixar a paginação na parte inferior */
-            width: 100%;
-            margin: 0;
-        }
+/* Paginacao */
+.pagination {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 20px; /* Fixar a paginação na parte inferior */
+    width: 100%;
+    margin: 0;
+}
 
-        .pagination button {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 5px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
+.pagination button {
+    background-color: #ff6f61;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-        .pagination button:hover {
-            background-color: #e55d54;
-        }
+.pagination button:hover {
+    background-color: #e55d54;
+}
 
-        .pagination .active {
-            background-color: #e55d54;
-        }
+.pagination .active {
+    background-color: #e55d54;
+}
 
-        @media screen and (max-width: 768px) {
-            .container{
-            display:block;
-        }
-        }
+/* Media Queries para telas menores */
+
+/* Para tablets */
+@media screen and (max-width: 1024px) {
+    .timeline {
+        grid-template-columns: repeat(2, 1fr); /* Duas colunas para tablets */
+        gap: 40px; /* Menor espaçamento */
+    }
+
+    .event {
+        width: 150px; /* Reduz o tamanho das imagens */
+        height: 150px;
+    }
+
+    #message-box {
+        width: 80%; /* A caixa de mensagem ocupa 80% da largura da tela */
+    }
+
+    header h1 {
+        font-size: 2em; /* Ajusta o tamanho do título para dispositivos menores */
+    }
+}
+
+/* Para smartphones */
+@media screen and (max-width: 768px) {
+    .timeline {
+        grid-template-columns: 1fr; /* Uma coluna para smartphones */
+        gap: 20px; /* Menor espaçamento */
+    }
+
+    .event {
+        width: 120px; /* Ajusta o tamanho das imagens */
+        height: 120px;
+    }
+
+    #message-box {
+        width: 90%; /* A caixa de mensagem ocupa 90% da largura da tela */
+    }
+
+    header h1 {
+        font-size: 1.8em; /* Ajusta o tamanho do título */
+    }
+
+    .pagination button {
+        padding: 8px 16px; /* Reduz o tamanho dos botões de paginação em telas pequenas */
+    }
+}
+
+/* Para dispositivos móveis muito pequenos */
+@media screen and (max-width: 480px) {
+    .timeline {
+        grid-template-columns: 1fr; /* Apenas uma coluna */
+        gap: 10px; /* Ajusta o espaçamento */
+    }
+
+    .event {
+        width: 100px; /* Tamanho ainda menor para telas pequenas */
+        height: 100px;
+    }
+
+    header h1 {
+        font-size: 1.6em; /* Reduz o tamanho do título */
+    }
+
+    #message-box {
+        width: 90%;
+    }
+
+    .pagination button {
+        padding: 8px 16px; /* Reduz o tamanho dos botões de paginação */
+    }
+}
+
     </style>
 </head>
 <body>
@@ -172,36 +240,36 @@
     <script>
         // Array com as mensagens de amor
         const messages = [
-            'Minha primeira mensagem especial para você!',
-            'Você é incrível, nunca se esqueça disso!',
-            'Te amo mais do que palavras podem expressar.',
-            'Pista final: Procure no lugar onde compartilhamos nosso maior segredo.',
-            'A felicidade está ao seu lado!',
-            'Eu adoro nosso tempo juntos!',
-            'A vida é mais bonita com você!',
-            'Eu sou grato(a) por ter você.',
-            'Você é a razão do meu sorriso.',
-            'Juntos, somos mais fortes.',
-            'Nunca imaginei que o amor fosse assim.',
-            'Você é o melhor de mim.',
-            'Sempre ao seu lado, hoje e sempre.',
-            'Com você, tudo é mais bonito.',
-            'Eu me apaixono mais por você a cada dia.',
-            'Eu sempre estarei ao seu lado.',
-            'Cada momento ao seu lado é especial.',
-            'A felicidade é estar com você.',
-            'Eu sou a pessoa mais sortuda por ter você.',
-            'O amor que sinto por você é infinito.',
-            'Cada dia ao seu lado é um presente.',
-            'Você ilumina minha vida.',
-            'Você é o meu maior tesouro.',
-            'Você é meu sol em dias nublados.',
-            'Eu te amo mais a cada amanhecer.',
-            'Você faz meu mundo mais colorido.',
-            'Com você, todo dia é especial.',
-            'Te amo com todo o meu coração.',
-            'Você é minha razão de ser.',
-            'Nunca pensei que poderia amar tanto.'
+            "Antes de você, eu nem sabia o que era amor de verdade. Agora, sei que é ter alguém com quem posso compartilhar minha vida, meus medos e minhas alegrias.",
+            "Esses três anos não foram só sobre os bons momentos, mas também sobre a nossa capacidade de estar juntos nos dias difíceis. E isso me fez te amar ainda mais.",
+            "Ao seu lado, eu me sinto melhor a cada dia. Não porque você me faça perfeito, mas porque você me aceita como sou, com todas as minhas falhas e qualidades.",
+            "Cada vez que estamos juntos, descubro mais sobre o amor. Ele não é uma ideia, uma emoção, mas algo real que se constrói com confiança, cuidado e muitos gestos diários.",
+            "Esse primeiro mês ao seu lado foi como uma descoberta diária, onde cada sorriso seu me fez perceber que cada segundo vale a pena. Se isso é só o começo, mal posso esperar para ver o que o futuro nos reserva.",
+            "Neste primeiro Natal juntos, percebi que o maior presente não é o que está sob a árvore, mas sim o fato de estarmos compartilhando esse momento. Nada se compara à alegria de ter você ao meu lado, e a certeza de que todos os Natais que virão serão ainda mais especiais com você.",
+            "Essa nossa primeira viagem juntos foi mais do que uma simples aventura; foi a prova de que até os momentos mais simples ganham um significado único quando estamos ao lado de quem amamos. Fico com essa lembrança como uma das melhores que já tive.",
+            "As nossas aventuras em shows foram como capítulos de uma história que só nós dois entendemos – cada música, cada grito, cada momento juntos, foram lembranças que vou guardar para sempre no coração.",
+            "Nosso bingo foi uma verdadeira diversão, com risadas, brincadeiras e aquela tensão gostosa a cada número chamado. Não ganhamos o prêmio, mas com certeza, a maior sorte foi ter compartilhado esses momentos juntos.",
+            "Assistir aos jogos da seleção feminina brasileira ao seu lado foi mais do que torcer por um time, foi dividir emoções, risadas e aquele brilho nos olhos que só o amor pode trazer." ,
+            "Rumo ao Hexa e também a primeira copa feminina aqui no BR com a minha nutrigata na seleção!",
+            "A nossa primeira viagem sozinhos para Ubatuba foi inesquecível. Entre o som do mar e a beleza da praia, descobrimos que o melhor destino sempre será aquele em que estamos juntos, e Ubatuba se tornou, de fato, o nosso lugar especial.",
+            "Você é, sem dúvida, a melhor copilota das viagens. Com você ao meu lado, cada estrada se torna mais curta e cada destino, ainda mais perfeito.",
+            "Cada beijo seu é mais do que um simples gesto; é como se o tempo parasse e o mundo ao nosso redor desaparecesse, o mar, o vento e o calor do sol tornam esse momento tão nosso, algo que vou guardar para sempre no coração. O toque dos seus lábios torna esse momento tão nosso, algo que vou guardar para sempre no coração.",
+            "Nosso primeiro Ano Novo juntos na praia, após já estarmos juntos por um ano, foi mágico. Com o som das ondas e o brilho das estrelas, celebramos não apenas a virada do ano, mas também tudo o que já construímos e o que ainda vamos viver ao lado um do outro.",
+            "Os nossos rolês nos parques em dias de sol são momentos simples, mas cheios de magia. Entre risadas e conversas, cada passo ao seu lado faz o dia ainda mais especial, e eu não trocaria por nada esse pedacinho de felicidade que encontramos juntos.",
+            "Ver você se formar em Nutrição foi um dos momentos mais especiais da minha vida. Eu sabia que esse dia chegaria, mas ver o seu esforço e dedicação se transformarem em realização foi ainda mais incrível. Fiquei tão orgulhoso de você, e ainda guardo com carinho todas as emoções desse dia tão marcante.",
+            "Estar ao seu lado, torcendo pelo nosso time do coração,  é uma das experiências mais especiais que vivemos. A cada jogo, a cada campeonato, nossa emoção só aumenta, e sempre que podemos, estamos no estádio, compartilhando aquela energia única. Ver o nosso time jogar com tanta garra e celebrar as vitórias juntos torna cada momento ainda mais inesquecível.",
+            "Eu nunca vou esquecer a sua felicidade quando fomos ao festival do Luan Santana. Ver você ali, cantando e se emocionando, me fez perceber o quanto aquele momento era especial para você. Foi incrível poder estar ao seu lado e compartilhar a alegria de ver seu cantor favorito ao vivo. Cada sorriso seu naquele dia vai ficar guardado no meu coração.",
+            "O que mais me encanta em você não são as grandes declarações de amor, mas os pequenos momentos cotidianos, como um toque, um sorriso ou um gesto de carinho que me faz sentir que estou no lugar certo.",
+            "Você é a razão do meu sorriso, mas mais do que isso, é a razão pela qual acredito que o amor verdadeiro existe, porque todos os dias você me mostra que podemos ser melhores juntos.",
+            "Eu sempre soube que amaria alguém, mas você me mostrou que o verdadeiro amor é encontrar alguém com quem você pode ser vulnerável, sem medo, e ainda assim se sentir seguro.",
+            "Você não é a razão pela qual eu sou feliz, mas é a razão pela qual a minha felicidade se torna ainda mais intensa. Te amo por ser quem você é e por tudo o que somos juntos.",
+            "Nunca pensei que encontraria alguém com quem eu pudesse ser tão transparente, tão verdadeiro. Com você, aprendi a importância de ser honesto, comigo e com você, em cada passo da nossa jornada.",
+            "Com você, descobri que o amor não é um conto de fadas, mas uma construção diária, feita de respeito, confiança e os detalhes que tornam cada dia ao seu lado inesquecível.",
+            "Eu te amo não porque somos perfeitos, mas porque juntos somos a versão mais autêntica de nós mesmos, e isso, para mim, é o maior presente que a vida me deu.",
+            "Quando olho para você, vejo não apenas a mulher que eu amo, mas a pessoa com quem eu quero compartilhar todos os momentos da minha vida, com todas as suas imperfeições e perfeições.",
+            "Esses três anos me mostraram que o verdadeiro amor não é algo que se encontra, mas algo que se constrói todos os dias, com paciência, compreensão e muito carinho.",
+            "Ao seu lado, eu me sinto melhor a cada dia. Não porque você me faça perfeito, mas porque você me aceita como sou, com todas as minhas falhas e qualidades.",
+            "O tempo passa rápido quando estou com você, mas a cada instante ao seu lado, sinto que o mundo fica mais leve e mais bonito. Obrigado por ser a mulher e namorada e melhor amiga, mais incrível desse mundo, com toda certeza nesses 3 anos ao seu lado eu sempre estive em constante felicidade, por que, estar ao seu lado me faz feliz! Te amo Muitoooooo! espero que tenha gostado dessas 30 demonstações de amor que nos definem mais do que tudo!"
         ];
 
         const images = [
@@ -219,14 +287,14 @@
 
         // Array de títulos personalizados
         const titles = [
-            'Primeiro Encontro', 'Nosso Passeio', 'O Grande Dia', 'Lembrança Especial', 
-            'Nossa Primeira Foto', 'Momento Inesquecível', 'Nosso Segredo', 'Sempre Juntos',
-            'Noite Mágica', 'Rindo Juntos', 'No Meu Coração', 'Te Amo Mais a Cada Dia',
-            'A Melhor Companhia', 'Sempre ao Seu Lado', 'Futuro Brilhante', 'Amor Verdadeiro', 
-            'Nosso Amor', 'Te Amo Muito', 'Momentos Perfeitos', 'Dia de Sol', 'Nosso Abraço', 
-            'Feliz Juntos', 'Sorrindo Sempre', 'Amor à Primeira Vista', 'Você e Eu', 
-            'Pequenos Momentos', 'Mãos Dadas', 'Cada Passo Juntos', 'Amor Eterno', 
-            'Nosso Caminho', 'Amigos e Amor'
+            'O Tesouro Escondido', 'Coração em Descoberta', 'Nos Detalhes do Amor', 'Segredos Entre Nós ', 
+            'Primeiras Descobertas', 'O Maior Presente', 'Memórias Guardadas', 'Aventuras Inesquecíveis',
+            'A Sorte do Momento ', 'Emoções à Flor da Pele ', 'Rumo ao Infinito', 'O Destino Se Revela',
+            'A Melhor Companhia', 'O Beijo Perdido', 'A Magia do Primeiro Ano', 'Caminhos de Sol', 
+            'O Grande Conquista', 'Luz no Olhar', 'Música do Coração', 'O Sorriso Perdido', 'Viajantes do Tempo', 
+            'Rumo ao Tesouro', 'Coração em Aventura', 'A Essência do Amor', 'Revelações do Coração', 
+            'O Enigma do Amor', 'Tesouros do Cotidiano', 'Nosso Rastro de Felicidade', 'O Som das Estrelas', 
+            'O Mundo Mais Leve'
         ];
 
         const itemsPerPage = 6; // Quantidade de itens por página
